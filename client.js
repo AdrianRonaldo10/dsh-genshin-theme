@@ -51,12 +51,12 @@ tag.textContent = `
 @keyframes gx-paimon-drag{0%,100%{transform:translate(-4px,2px) rotate(-9deg) scale(1.06,.94)}20%{transform:translate(4px,-3px) rotate(7deg) scale(.95,1.05)}40%{transform:translate(-5px,4px) rotate(-12deg) scale(1.09,.91)}60%{transform:translate(5px,-4px) rotate(11deg) scale(.93,1.07)}80%{transform:translate(-3px,2px) rotate(-6deg) scale(1.03,.97)}}
 @keyframes gx-paimon-land{0%{transform:translateY(-8px) scale(1.12,.88)}55%{transform:translateY(2px) scale(.94,1.06)}100%{transform:translateY(0) scale(1)}}
 @media (prefers-reduced-motion:reduce){.gx-paimon[data-dragging] img,.gx-paimon[data-motion=land] img{animation:none}}
-/* Restore the pre-update wide markdown table/list scroll behavior */
+/* Restore the pre-update wide markdown table/list layout */
 body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"]{max-width:100%;min-width:0}
-body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"].md-table-wide{overflow-x:auto!important;padding-bottom:var(--dsh-scrollbar-width,8px)}
-body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"]::-webkit-scrollbar{height:8px}
-body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"]::-webkit-scrollbar-thumb{background:var(--dsw-alias-scrollbar-bg-l2);border-radius:999px}
-body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"]::-webkit-scrollbar-thumb:hover{background:var(--dsw-alias-scrollbar-hover-l2)}
+body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"] table{width:100%!important;max-width:none!important;table-layout:auto!important}
+body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"] th,
+body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"] td{min-width:0!important;max-width:none!important;white-space:normal!important;overflow-wrap:anywhere}
+body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"].md-table-wide{overflow-x:visible!important;padding-bottom:0!important}
 `;
 document.head.appendChild(tag);
 }
