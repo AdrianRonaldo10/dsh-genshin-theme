@@ -156,6 +156,7 @@ let landTimer = null;
 let nextDragQuipAt = 0;
 let savedSpot = readPaimonPosition();
 let userPlaced = savedSpot !== null;
+host.style.pointerEvents = "none";
 const showBubble = (activity, text) => {
 bubble.textContent = text === void 0 ? paimonQuipFor(activity) : text;
 host.setAttribute("data-show-bubble", "");
@@ -345,8 +346,33 @@ if (dragging || host.dataset.placement === "hero" || host.dataset.activity !== "
 showBubble("idle");
 }, 15000);
 const pollTimer = window.setInterval(detectState, 1500);
+const isHorizontalScrollSurface = (element) => {
+if (element === null || typeof element.closest !== "function") return false;
+let node = element;
+while (node !== null && node.nodeType === 1) {
+const style = window.getComputedStyle(node);
+if (/(auto|scroll|overlay)/.test(style.overflowX)) return true;
+node = node.parentElement;
+}
+return false;
+};
+const updatePaimonHitTesting = (event) => {
+if (dragging || document.body.hasAttribute("data-paimon-disabled")) return;
+const rect = host.getBoundingClientRect();
+const inside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+if (!inside) {
+host.style.pointerEvents = "none";
+return;
+}
+host.style.pointerEvents = "none";
+const under = document.elementFromPoint(event.clientX, event.clientY);
+const interactive = under !== null && typeof under.closest === "function" && under.closest("button, a[href], input, textarea, select, [role=button], [role=slider], [role=menuitem], [data-composer-card], .JVDQca_root, .JVDQca_rail, .JVDQca_item, .JVDQca_thumbnail") !== null;
+host.style.pointerEvents = interactive || isHorizontalScrollSurface(under) ? "none" : "auto";
+};
 const onPointerMove = (event) => {
-if (dragging || host.dataset.placement !== "float" || document.body.hasAttribute("data-paimon-disabled")) return;
+if (dragging || document.body.hasAttribute("data-paimon-disabled")) return;
+updatePaimonHitTesting(event);
+if (host.dataset.placement !== "float") return;
 const rect = host.getBoundingClientRect();
 const cx = rect.left + rect.width / 2;
 const cy = rect.top + rect.height / 2;
@@ -381,6 +407,7 @@ lastNear = near;
 const onPointerDown = (event) => {
 if (event.button !== void 0 && event.button !== 0) return;
 if (document.body.hasAttribute("data-paimon-disabled")) return;
+host.style.pointerEvents = "auto";
 event.preventDefault();
 const rect = host.getBoundingClientRect();
 dragging = true;
@@ -442,6 +469,7 @@ host.removeAttribute("data-dragging");
 host.removeAttribute("data-drag-fast");
 try { if (typeof host.hasPointerCapture === "function" && host.hasPointerCapture(dragPointerId)) host.releasePointerCapture(dragPointerId); } catch (_) {}
 dragPointerId = null;
+host.style.pointerEvents = "none";
 clearWander();
 if (dragMoved) {
 const rect = host.getBoundingClientRect();
