@@ -1,0 +1,25 @@
+{
+  "name": "genshin-theme",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Genshin Impact theme, Paimon pet, and draggable desktop companion for DeepSeek Harness.",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": ["@deepseek-ai/dsh-client-ui-theme"],
+      "immediately": true
+    }
+  }
+}

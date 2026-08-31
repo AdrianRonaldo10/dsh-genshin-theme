@@ -1,0 +1,8 @@
+# genshin-theme bundle patch.
+# Inserted as a profile layer when `dsh plugin` installs this package and
+# reconciles it into dsh.profile.bundles. The row loads this package's server
+# entry (index.js, boot skin) and its browser client (client.js, themes +
+# draggable Paimon).
+- insert:
+    - id: genshin-theme
+      name: genshin-theme
