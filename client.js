@@ -52,7 +52,7 @@ tag.textContent = `
 @keyframes gx-paimon-land{0%{transform:translateY(-8px) scale(1.12,.88)}55%{transform:translateY(2px) scale(.94,1.06)}100%{transform:translateY(0) scale(1)}}
 @media (prefers-reduced-motion:reduce){.gx-paimon[data-dragging] img,.gx-paimon[data-motion=land] img{animation:none}}
 /* Restore the pre-update wide markdown table/list layout */
-body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"]>*>*>*>div[class*=markdown]{width:min(100%,700px)!important;min-width:0!important;max-width:none!important}
+body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] div[class*=markdown]{width:min(700px,96vw)!important;min-width:0!important;max-width:none!important}
 body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"]{max-width:100%;min-width:0}
 body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"] table{width:100%!important;max-width:none!important;table-layout:auto!important}
 body:is([data-genshin-theme],[data-fontaine-theme],[data-sumeru-theme]) [data-chat-flow-kind="assistant-step"] [class*="tableScroll"] th,
